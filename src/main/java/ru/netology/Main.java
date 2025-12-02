@@ -7,9 +7,9 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 
 public class Main {
-    public static ArrayBlockingQueue aQueue = new ArrayBlockingQueue(100);
-    public static ArrayBlockingQueue bQueue = new ArrayBlockingQueue(100);
-    public static ArrayBlockingQueue cQueue = new ArrayBlockingQueue(100);
+    public static ArrayBlockingQueue <String> aQueue = new ArrayBlockingQueue(100);
+    public static ArrayBlockingQueue <String> bQueue = new ArrayBlockingQueue(100);
+    public static ArrayBlockingQueue <String> cQueue = new ArrayBlockingQueue(100);
 
     public static void main(String[] args) {
 
@@ -40,7 +40,7 @@ public class Main {
             int aMax = 0;
             for (int i = 0; i < 10_000; i++) {
                 try {
-                    text = (String) aQueue.take();
+                    text = aQueue.take();
                     System.out.println("takeA");
                 } catch (InterruptedException e) {
                     return;
@@ -67,7 +67,7 @@ public class Main {
             int bMax = 0;
             for (int i = 0; i < 10_000; i++) {
                 try {
-                    text = (String) bQueue.take();
+                    text = bQueue.take();
                     System.out.println("takeB");
                 } catch (InterruptedException e) {
                     return;
@@ -94,19 +94,19 @@ public class Main {
             int cMax = 0;
             for (int i = 0; i < 10_000; i++) {
                 try {
-                    text = (String) cQueue.take();
+                    text = cQueue.take();
                     System.out.println("takeC");
                 } catch (InterruptedException e) {
                     return;
                 }
-                int aCount = 0;
+                int cCount = 0;
                 for (int j = 0; j < text.length(); j++) {
                     if (text.charAt(j) == 'c') {
-                        aCount++;
+                        cCount++;
                     }
                 }
-                if (cMax < aCount) {
-                    cMax = aCount;
+                if (cMax < cCount) {
+                    cMax = cCount;
                     textInMemory = text;
                 }
             }
